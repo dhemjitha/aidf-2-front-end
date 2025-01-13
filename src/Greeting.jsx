@@ -1,9 +1,7 @@
-const Greeting = () => {
-    const name = "Dulran";
-    const age = 19;
-
+const Greeting = (props) => {
+    
     return (
-        <h1>Hello, {name}! You are {age} years old.</h1>
+        <h1 className="text-red-500 text-2xl">Hello, {props.name}! You are {props.age} years old.</h1>
     );
 
 }

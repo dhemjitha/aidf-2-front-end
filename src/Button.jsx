@@ -1,8 +1,6 @@
-function Button() {
+function Button(props) {
 
-    const handleClick = () => {
-        console.log("Button clicked!");
-    }
+    
 
     return (
         <button
@@ -14,9 +12,9 @@ function Button() {
                 borderRadius: "4px",
             }}
             type="button"
-            onMouseOver={handleClick}
+            onClick={props.onClick}
         >
-            Click me
+            {props.children}
         </button>
     );
 }
