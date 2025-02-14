@@ -4,16 +4,6 @@ import { Button } from "@/components/ui/button";
 
 function HotelCard(props) {
 
-    const [num, setNum] =  useState(1);
-
-    const handleClick = (e) => {
-        //batching
-        setNum(num => num + 1);
-        setNum(num => num + 1);
-        setNum(num => num + 1);
-        console.log(props.hotel);
-    }
-
   return (
     <div
     // to={`/hotel/${props.hotel._id}`}
@@ -44,11 +34,6 @@ function HotelCard(props) {
       <div className="flex items-baseline space-x-2">
         <span className="text-xl font-bold">${props.hotel.price}</span>
       </div>
-    </div>
-
-    <div className="mt-4">
-        <p>{num}</p>
-        <Button onClick={handleClick}>Click</Button>
     </div>
     
   </div>

@@ -46,11 +46,11 @@ export default function Hero() {
       </div>
 
       {/* Hero Image */}
-      <img
+      {/* <img
         src="/assets/hero/hero_1.jpg"
         alt=""
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-      />
+      /> */}
 
     </div>
   );
