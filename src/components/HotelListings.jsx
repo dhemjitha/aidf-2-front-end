@@ -1,19 +1,15 @@
 import HotelCard from "./HotelCard";
 import LocationTab from "./LocationTab";
-import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
-import { getHotels } from "@/lib/api/hotels";
+import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react";
+import { useGetHotelsQuery } from "@/lib/api";
 
 
 
 export default function HotelListings() {
 
-  const [hotels, setHotels] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState("");
+  const { data: hotels, isLoading, isError, error } = useGetHotelsQuery();
 
   const locations = ["ALL", "France", "Italy", "Australia", "Japan"]
 
@@ -27,16 +23,7 @@ export default function HotelListings() {
     return hotel.location.toLowerCase().includes(selectedLocation.toLowerCase());
   })
 
-  useEffect(() => {
-    getHotels().then((hotels) => {
-      setHotels(hotels);
-    }).catch((error) => {
-      setIsError(true);
-      setError(error.message);
-    }).finally(() => {
-      setIsLoading(false);
-    })
-  }, [])
+
 
   if (isLoading) {
     return (

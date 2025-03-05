@@ -9,21 +9,27 @@ import HotelPage from './pages/hotel.page';
 import RootLayout from './layouts/root-layout.layout';
 import MainLayout from './layouts/main-layout.layout';
 import HotelsPage from './pages/hotels.page';
+import { store } from './lib/store';
+import { Provider } from 'react-redux';
+import CreateHotelPage from './pages/create-hotel.page';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<RootLayout />}>
-        <Route element={<MainLayout/>}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/hotels/:id" element={<HotelPage />} />
-          <Route path="/hotels" element={<HotelsPage />} />
-        </Route>
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<RootLayout />}>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/hotels/:id" element={<HotelPage />} />
+              <Route path="/hotels" element={<HotelsPage />} />
+              <Route path="/hotels/create" element={<CreateHotelPage />} />
+            </Route>
+            <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )

@@ -22,8 +22,8 @@ function Navigation() {
                     <Link to="/" className="transition-colors hover:text-gray-400">
                         Home
                     </Link>
-                    <Link to="/hotels" className="transition-colors hover:text-gray-400">
-                        Hotels
+                    <Link to="/hotels/create" className="transition-colors hover:text-gray-400">
+                        Create Hotel
                     </Link>
                 </div>
             </div>
@@ -56,8 +56,8 @@ function Navigation() {
                         Home
                     </Link>
 
-                    <Link to="/hotels" onClick={toggleMenu} className="hover:text-gray-400 flex items-center justify-center py-4">
-                        Hotels
+                    <Link to="/hotels/create" onClick={toggleMenu} className="hover:text-gray-400 flex items-center justify-center py-4">
+                        Create Hotel
                     </Link>
                     
                     <Button variant="ghost">
