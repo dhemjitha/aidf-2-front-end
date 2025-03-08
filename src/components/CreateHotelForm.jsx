@@ -49,8 +49,10 @@ const CreateHotelForm = () => {
                 price,
                 description,
             }).unwrap();
+            toast.dismiss();
             toast.success("Hotel created successfully");
         } catch (error) {
+            toast.dismiss();
             toast.error("Hotel creation failed");
         }
     }
