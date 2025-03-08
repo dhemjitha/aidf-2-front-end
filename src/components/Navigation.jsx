@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Globe, Menu, X } from 'lucide-react';
 import { Link } from 'react-router';
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 
 function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +10,8 @@ function Navigation() {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    const { user } = useUser();
 
     return (
         <nav className="z-50 bg-black flex items-center justify-between px-8 text-white py-4">
@@ -23,9 +25,9 @@ function Navigation() {
                     <Link to="/" className="transition-colors hover:text-gray-400">
                         Home
                     </Link>
-                    <Link to="/hotels/create" className="transition-colors hover:text-gray-400">
+                    {user?.publicMetadata?.role == "admin" && (<Link to="/hotels/create" className="transition-colors hover:text-gray-400">
                         Create Hotel
-                    </Link>
+                    </Link>)}
                 </div>
             </div>
 
@@ -43,18 +45,18 @@ function Navigation() {
                     EN
                 </Button>
                 <SignedOut>
-                <Button variant="ghost">
-                    <Link to="/sign-in">Log In</Link>
-                </Button>
-                <Button>
-                    <Link to="/sign-up">Sign Up</Link>
-                </Button>
+                    <Button variant="ghost">
+                        <Link to="/sign-in">Log In</Link>
+                    </Button>
+                    <Button>
+                        <Link to="/sign-up">Sign Up</Link>
+                    </Button>
                 </SignedOut>
                 <SignedIn>
-                    <UserButton/>
+                    <UserButton />
                     <Button>
-                    <Link to="/account">My Account</Link>
-                </Button>
+                        <Link to="/account">My Account</Link>
+                    </Button>
                 </SignedIn>
             </div>
 
@@ -65,10 +67,10 @@ function Navigation() {
                         Home
                     </Link>
 
-                    <Link to="/hotels/create" onClick={toggleMenu} className="hover:text-gray-400 flex items-center justify-center py-4">
+                    {user?.publicMetadata?.role == "admin" && (<Link to="/hotels/create" onClick={toggleMenu} className="hover:text-gray-400 flex items-center justify-center py-4">
                         Create Hotel
-                    </Link>
-                    
+                    </Link>)}
+
                     <Button variant="ghost">
                         <Globe className="h-5 w-5 mr-2" />
                         EN

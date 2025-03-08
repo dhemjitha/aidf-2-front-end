@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetHotelByIdQuery } from "@/lib/api";
+import { useCreateBookingMutation, useGetHotelByIdQuery } from "@/lib/api";
 import {
     Coffee,
     MapPin,
@@ -17,6 +17,21 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function HotelPage() {
     const { id } = useParams();
     const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(id);
+
+    const [createBooking, { isLoading: isCreateBookingLoading }] = useCreateBookingMutation();
+
+    const handleClick = async () => {
+        try {
+            await createBooking({
+                hotelId: id,
+                checkIn: new Date(),
+                checkOut: new Date(),
+                roomNumber: 200
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     if (isLoading)
         return (
@@ -138,7 +153,7 @@ export default function HotelPage() {
                             <p className="text-2xl font-bold">${hotel.price}</p>
                             <p className="text-sm text-muted-foreground">per night</p>
                         </div>
-                        <Button size="lg">Book Now</Button>
+                        <Button size="lg" onClick={handleClick}>Book Now</Button>
                     </div>
                 </div>
             </div>
