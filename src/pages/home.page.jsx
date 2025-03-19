@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import HotelBookingGrid from "@/components/HotelBookingGrid";
 import HotelListings from "@/components/HotelListings";
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
                 />
             </div>
             <HotelListings />
+            <HotelBookingGrid/>
         </main>
     )
 }
