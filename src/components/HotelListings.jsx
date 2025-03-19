@@ -40,11 +40,11 @@ export default function HotelListings() {
         </div>
 
         <div className="flex items-center gap-x-2">
-          {
+          {/* {
             locations.map((location, i) => {
               return (<LocationTab key={i} selectedLocation={selectedLocation} name={location} onClick={handleSelectLocation} />)
             })
-          }
+          } */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-4 cursor-pointer">
@@ -68,15 +68,7 @@ export default function HotelListings() {
             experience.
           </p>
         </div>
-
-        <div className="flex items-center gap-x-2 mb-4">
-          {
-            locations.map((location, i) => {
-              return (<LocationTab key={i} selectedLocation={selectedLocation} name={location} onClick={handleSelectLocation} />)
-            })
-          }
-        </div>
-
+        
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
