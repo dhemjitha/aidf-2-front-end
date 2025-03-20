@@ -125,7 +125,7 @@ export default function HotelPage() {
     const totalPrice = hotel.price * nights;
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 min-h-screen">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                     <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px]">
