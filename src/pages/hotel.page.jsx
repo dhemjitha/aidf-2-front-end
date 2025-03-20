@@ -11,7 +11,7 @@ import {
     Wifi,
     Calendar as CalendarIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -37,6 +37,10 @@ export default function HotelPage() {
 
     const [isCheckInCalendarOpen, setIsCheckInCalendarOpen] = useState(false);
     const [isCheckOutCalendarOpen, setIsCheckOutCalendarOpen] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleBookingClick = () => {
         setIsDialogOpen(true);
