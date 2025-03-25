@@ -89,7 +89,7 @@ The Visitor is someone looking to book a hotel for their trip. They are browsing
 
 - **Other Characteristics:** Visitors may be first-time users or repeat customers seeking accommodations tailored to their specific preferences or past experiences.
 
-**User Type: Admin**
+### **User Type: Admin**
 
 The Admin is responsible for managing hotel listings and overseeing booking-related tasks.
 
@@ -166,9 +166,8 @@ The core design concept for **Horizone** is centered on simplicity, clarity, and
 
 ## Technology Stack Selection
 
-  💡 Discuss why the Technologies and Tools you used are chosen
 
-### **\[EXAMPLE\] 1. Frontend - React.js with TanStack Query**
+### ** Frontend - React.js with RTK Query**
 
 ### **Why React.js?**
 
@@ -232,9 +231,13 @@ The core design concept for **Horizone** is centered on simplicity, clarity, and
 
 The architecture of Horizone is built around a **Client-Server Model** with distinct separation of concerns between the frontend, backend, and AI integration.
 
-![](https://pub-a68d0c01397443d094d3236b5e9b30cf.r2.dev/portfolio-images/7ca9af1a3d7af6349dba6442c31c4a8b93d3d58ed43d4a9c02dad09a24c1b966.jpg?versionId=7e6a33cd8abe101e4e14e2d3a95e5782)## Entity-Extended Relationship Diagram
+![](https://pub-a68d0c01397443d094d3236b5e9b30cf.r2.dev/portfolio-images/7ca9af1a3d7af6349dba6442c31c4a8b93d3d58ed43d4a9c02dad09a24c1b966.jpg?versionId=7e6a33cd8abe101e4e14e2d3a95e5782)
 
-![](https://pub-a68d0c01397443d094d3236b5e9b30cf.r2.dev/portfolio-images/74d53c432817220f1bdf3f822e5ffebc43fbd865057f010d26db7294e49fe70f.jpg?versionId=7e6a33cd4594ee5c4d35060ae686318a)### **Frontend (React.js + Tailwind CSS)**:
+## Entity-Extended Relationship Diagram
+
+![](https://pub-a68d0c01397443d094d3236b5e9b30cf.r2.dev/portfolio-images/74d53c432817220f1bdf3f822e5ffebc43fbd865057f010d26db7294e49fe70f.jpg?versionId=7e6a33cd4594ee5c4d35060ae686318a)
+
+### **Frontend (React.js + Tailwind CSS)**:
 
 The frontend is responsible for providing an interactive user interface for the hotel booking process. Users can browse hotels, input their preferences, and view personalized recommendations. React.js ensures efficient rendering of the UI, while Tailwind CSS is used for styling, ensuring a responsive and visually appealing design that adapts to various screen sizes. The frontend communicates with the backend through RESTful API calls to fetch hotel data, recommendations, and booking information.
 
