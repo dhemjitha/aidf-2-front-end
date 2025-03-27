@@ -34,6 +34,9 @@ function HotelCard(props) {
         <div className="flex items-baseline space-x-2">
           <span className="text-xl font-bold">${props.hotel.price}</span>
         </div>
+        <p className="text-muted-foreground">
+           Similarity: {(props.confidence * 100).toFixed(2)}%
+         </p>
       </div>
 
     </Link>

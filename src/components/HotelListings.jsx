@@ -1,16 +1,23 @@
+import { useGetHotelsForSearchQueryQuery } from "@/lib/api";
 import HotelCard from "./HotelCard";
 import LocationTab from "./LocationTab";
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react";
-import { useGetHotelsQuery } from "@/lib/api";
 import { Skeleton } from "./ui/skeleton";
-
-
+import { useSelector } from "react-redux";
 
 export default function HotelListings() {
+  const searchValue = useSelector((state) => state.search.value);
 
-  const { data: hotels, isLoading, isError, error } = useGetHotelsQuery();
+  const {
+    data: hotels,
+    isLoading,
+    isError,
+    error
+  } = useGetHotelsForSearchQueryQuery({
+    query: searchValue,
+  });
 
   const locations = ["ALL", "France", "Italy", "Australia", "Japan"]
 
@@ -20,30 +27,32 @@ export default function HotelListings() {
     setSelectedLocation(location);
   }
 
-  const filteredHotels = selectedLocation === "ALL" ? hotels : hotels.filter((hotel) => {
-    return hotel.location.toLowerCase().includes(selectedLocation.toLowerCase());
-  })
-
-
-
+  // Loading state (for initial load and after search)
   if (isLoading) {
     return (
-      <section className="px-5 py-6 lg:py-16">
+      <section className="px-5 py-6 lg:py-16 lg:px-8">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Top trending hotels worldwide
+            Top Trending Hotels Worldwide
           </h2>
 
           <p className="text-lg text-muted-foreground">
-            Discover the most trending hotels worldwide for an unforgettable
-            experience.
+           Discover the most trending hotels for an unforgettable experience
           </p>
         </div>
 
+        <div className="flex items-center gap-x-2 mb-4">
+          {locations.map((location, i) => (
+            <LocationTab
+              key={i}
+              selectedLocation={selectedLocation}
+              name={location}
+              onClick={handleSelectLocation}
+            />
+          ))}
+        </div>
+
         <div className="space-y-8">
-          <div>
-            <Skeleton className="h-8 w-full max-w-[700px] bg-gray-300/70" />
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {Array.from({ length: 4 }).map((_, index) => (
               <div key={index} className="rounded-xl border bg-card text-card-foreground shadow overflow-hidden">
@@ -64,17 +73,17 @@ export default function HotelListings() {
     );
   }
 
+  // Error state
   if (isError) {
     return (
       <section className="px-5 py-6 lg:py-16 lg:px-8">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Top trending hotels worldwide
+            Oops! Something went wrong
           </h2>
 
           <p className="text-lg text-muted-foreground">
-            Discover the most trending hotels worldwide for an unforgettable
-            experience.
+            We couldn't load hotels
           </p>
         </div>
 
@@ -85,38 +94,48 @@ export default function HotelListings() {
             Error while fetching data...
           </AlertDescription>
         </Alert>
-
       </section>
     );
   }
+
+  // Successful results
+  const filteredHotels = selectedLocation === "ALL"
+    ? hotels
+    : hotels.filter(({ hotel }) => {
+        return hotel.location.toLowerCase().includes(selectedLocation.toLowerCase());
+      });
 
   return (
     <section className="px-5 py-6 lg:py-16 lg:px-8">
       <div className="mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Top trending hotels worldwide
+          Top Trending Hotels Worldwide
         </h2>
 
         <p className="text-lg text-muted-foreground">
-          Discover the most trending hotels worldwide for an unforgettable
-          experience.
+          Discover the most trending hotels for an unforgettable experience
         </p>
       </div>
 
-      <div className="flex items-center gap-x-2">
-        {
-          locations.map((location, i) => {
-            return (<LocationTab key={i} selectedLocation={selectedLocation} name={location} onClick={handleSelectLocation} />)
-          })
-        }
+      <div className="flex items-center gap-x-2 mb-4">
+        {locations.map((location, i) => (
+          <LocationTab
+            key={i}
+            selectedLocation={selectedLocation}
+            name={location}
+            onClick={handleSelectLocation}
+          />
+        ))}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-4 cursor-pointer">
-        {
-          filteredHotels.map((hotel) => {
-            return (<HotelCard key={hotel._id} hotel={hotel} />)
-          })
-        }
+        {filteredHotels.map(({ hotel, confidence }) => (
+          <HotelCard
+            key={hotel._id}
+            hotel={hotel}
+            confidence={confidence}
+          />
+        ))}
       </div>
     </section>
   );

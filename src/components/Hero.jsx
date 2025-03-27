@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { submit } from "@/lib/features/searchSlice";
 import { Sparkles } from "lucide-react";
+import { useDispatch } from "react-redux";
 
 
 export default function Hero() {
 
+  const dispatch = useDispatch();
+
   const handleSearch = (e) => {
     e.preventDefault();
+    const searchQuery = e.target.search.value;
+    console.log(searchQuery);
+
+    dispatch(submit(searchQuery));
 
   };
 
@@ -29,6 +37,7 @@ export default function Hero() {
         >
           <Input
             type="text"
+            name="search"
             placeholder="Describe your destination, experience, or hotel..."
             className="flex-grow  bg-transparent lg:text-lg  text-white placeholder:text-white/50 border-none outline-none ring-0 ring-offset-0 focus:border-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 "
           />

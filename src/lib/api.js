@@ -8,13 +8,16 @@ export const api = createApi({
         baseUrl: `${BACKEND_URL}/api/`, prepareHeaders: async (headers, { getState }) => {
             const token = await window?.Clerk?.session?.getToken();
             if (token) {
-                headers.set('Authorization', `Bearer ${token}`);
+                headers.set("Authorization", `Bearer ${token}`);
             }
-        }
+        },
     }),
     endpoints: (builder) => ({
         getHotels: builder.query({
             query: () => "hotels",
+        }),
+        getHotelsForSearchQuery: builder.query({
+            query: ({ query }) => `hotels/search/retrieve?query=${query}`,
         }),
         getHotelById: builder.query({
             query: (id) => `hotels/${id}`,
@@ -36,4 +39,10 @@ export const api = createApi({
     }),
 });
 
-export const { useGetHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation, useCreateBookingMutation } = api;
+export const {
+    useGetHotelsQuery,
+    useGetHotelsForSearchQueryQuery,
+    useGetHotelByIdQuery,
+    useCreateHotelMutation,
+    useCreateBookingMutation,
+} = api;
