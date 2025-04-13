@@ -16,6 +16,14 @@ export default function Hero() {
 
     dispatch(submit(searchQuery));
 
+    const hotelListingsElement = document.getElementById("hotel-listings")
+      if (hotelListingsElement) {
+        hotelListingsElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+
   };
 
   return (

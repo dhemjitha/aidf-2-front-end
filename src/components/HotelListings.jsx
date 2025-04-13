@@ -14,7 +14,8 @@ export default function HotelListings() {
     data: hotels,
     isLoading,
     isError,
-    error
+    error,
+    isFetching
   } = useGetHotelsForSearchQueryQuery({
     query: searchValue,
   });
@@ -27,11 +28,10 @@ export default function HotelListings() {
     setSelectedLocation(location);
   }
 
-  // Loading state (for initial load and after search)
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <section className="px-5 py-6 lg:py-16 lg:px-8">
-        <div className="mb-12">
+        <div id="hotel-listings" className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Top Trending Hotels Worldwide
           </h2>
@@ -73,11 +73,10 @@ export default function HotelListings() {
     );
   }
 
-  // Error state
   if (isError) {
     return (
       <section className="px-5 py-6 lg:py-16 lg:px-8">
-        <div className="mb-12">
+        <div id="hotel-listings" className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Oops! Something went wrong
           </h2>
@@ -98,7 +97,6 @@ export default function HotelListings() {
     );
   }
 
-  // Successful results
   const filteredHotels = selectedLocation === "ALL"
     ? hotels
     : hotels.filter(({ hotel }) => {
@@ -108,7 +106,7 @@ export default function HotelListings() {
   return (
     <section className="px-5 py-6 lg:py-16 lg:px-8">
       <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 id="hotel-listings" className="text-3xl md:text-4xl font-bold mb-4">
           Top Trending Hotels Worldwide
         </h2>
 
@@ -134,6 +132,7 @@ export default function HotelListings() {
             key={hotel._id}
             hotel={hotel}
             confidence={confidence}
+            isFromSearch={searchValue.trim() !== ""}
           />
         ))}
       </div>

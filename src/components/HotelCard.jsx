@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 
 function HotelCard(props) {
 
+  const isFromSearch = props.isFromSearch === true;
+
   return (
     <Link
       to={`/hotels/${props.hotel._id}`}
@@ -16,6 +18,11 @@ function HotelCard(props) {
           alt={props.hotel.name}
           className="object-cover w-full h-full absolute transition-transform group-hover:scale-105"
         />
+        {isFromSearch && props.confidence !== undefined && (
+          <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+            {(props.confidence * 100).toFixed(2)}% match
+          </div>
+        )}
       </div>
 
       <div className="mt-3 space-y-2">
@@ -34,9 +41,6 @@ function HotelCard(props) {
         <div className="flex items-baseline space-x-2">
           <span className="text-xl font-bold">${props.hotel.price}</span>
         </div>
-        <p className="text-muted-foreground">
-           Similarity: {(props.confidence * 100).toFixed(2)}%
-         </p>
       </div>
 
     </Link>
